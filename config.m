@@ -1,0 +1,21 @@
+function s=config
+
+%%%%
+%   FORMAT
+%%%%
+s.Format = {'nanoscope5','sdf','nanonisspectrum','sxm'};
+
+%%%%
+%   USER POSTPROCESSING FUNCTIONS
+%%%%
+s.UserFunctions = {'Fit(channel,name)'};
+
+%%%%
+%   CACHING
+%%%%
+s.CachingEnabled = true;
+% Prefix given to cached filename
+s.Caching.Filename.Prefix = '';
+s.Caching.Filename.Extension = '.mat';
+s.Caching.CachingFolder = '/Users/antoine/tmp'; % either an absolute path or relative path from parent directory of the file
+end
