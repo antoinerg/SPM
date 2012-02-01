@@ -13,7 +13,7 @@ s.UserFunctions = {'Fit(channel,name)'};
 %%%%
 %   CACHING
 %%%%
-s.CachingEnabled = true;
+s.CachingEnabled = false;
 % Prefix given to cached filename
 s.Caching.Filename.Prefix = '';
 s.Caching.Filename.Extension = '.mat';
