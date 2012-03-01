@@ -1,4 +1,6 @@
-classdef nanoscope5 < SPM.spm
+classdef spm < SPM.spm
+% nanoscope5
+
     % Mandatory fields for the interface
     properties(SetAccess='protected')
         Channel;
@@ -15,11 +17,11 @@ classdef nanoscope5 < SPM.spm
     end
     
     methods
-        function n5 = nanoscope5(path)
+        function n5 = spm(path)
             % Loads an SDF file with given filename sdf(filename)
             n5 = n5@SPM.spm(path);
             if n5.FromCache==false
-                n5.Format='nanoscope5';
+                n5.Format='spm';
                 parseHeader(n5);
             end
         end

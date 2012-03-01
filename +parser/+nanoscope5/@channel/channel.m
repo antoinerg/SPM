@@ -1,4 +1,4 @@
-classdef nanoscope5channel < SPM.channel
+classdef channel < SPM.channel
     properties(Hidden=true)
         pos;
         scaling;
@@ -10,8 +10,8 @@ classdef nanoscope5channel < SPM.channel
     end
     
     methods
-        function n5ch = nanoscope5channel(n5)
-            if (~isa(n5,'SPM.format.nanoscope5')), MException('Parent must be a nanoscope5 object');end;
+        function n5ch = channel(n5)
+            if (~isa(n5,'SPM.parser.nanoscope5.spm')), MException('Parent must be a nanoscope5 object');end;
             n5ch.spm = n5;
         end
         

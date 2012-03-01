@@ -95,10 +95,10 @@ classdef spm < handle
             % configuration file
             cfg = SPM.config;
             for i=1:length(cfg.Format)
-                eval(['bool=SPM.format.' cfg.Format{i} '.is_valid_format(''' path ''');']);
+                eval(['bool=SPM.parser.' cfg.Format{i} '.spm.is_valid_format(''' path ''');']);
                 if(bool)
                     disp(['File format is ' cfg.Format{i}]);
-                    eval(['spm=SPM.format.' cfg.Format{i} '(''' path ''');']);
+                    eval(['spm=SPM.parser.' cfg.Format{i} '.spm(''' path ''');']);
                     return
                 end
             end

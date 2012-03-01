@@ -32,7 +32,7 @@ z_sensitivity = params(5).values; %Z sens
 L=length(image_pos);
 
 for i=1:L
-   ch=SPM.format.nanoscope5channel(n5);
+   ch=SPM.parser.nanoscope5.channel(n5);
    ch.Name=params(3).values{i};
    ch.Direction='Forward';
    ch.pos=image_pos{i};
@@ -71,12 +71,12 @@ while( and( ~eof, ~header_end ) )
     
     for i=1:nstrings
         if findstr(header_strings(i).label,line)
-            if (SPM.format.nanoscope5.extract_number(line))
+            if (SPM.parser.nanoscope5.spm.extract_number(line))
                 b=findstr('LSB',line);
                 if (b>0)
-                    parameters(i).values(parcounter(i))={SPM.format.nanoscope5.extract_number(line(b(1):end))};
+                    parameters(i).values(parcounter(i))={SPM.parser.nanoscope5.spm.extract_number(line(b(1):end))};
                 else
-                    parameters(i).values(parcounter(i))={SPM.format.nanoscope5.extract_number(line)};
+                    parameters(i).values(parcounter(i))={SPM.parser.nanoscope5.spm.extract_number(line)};
                 end;
             else
                 b= findstr(line,'"');
