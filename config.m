@@ -3,7 +3,7 @@ function s=config
 %%%%
 %   FORMAT
 %%%%
-s.Format = {'nanoscope5','sdf','nanonisspectrum','sxm'};
+s.Format = {'nanoscope5','sdf'};
 
 %%%%
 %   USER POSTPROCESSING FUNCTIONS
