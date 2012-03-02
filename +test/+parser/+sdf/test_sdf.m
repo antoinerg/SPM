@@ -26,4 +26,5 @@ assertEqual(length(s.Channel),16);
 function testChannelData(f)
 s = SPM.parser.sdf.spm(f.image);
 assertEqual(size(s.Channel(1).Data),[255 256]);
-
+s = SPM.parser.sdf.spm(f.spectrum);
+assertEqual(size(s.Channel(1).Data),[1 29999]);
