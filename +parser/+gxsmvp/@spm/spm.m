@@ -13,7 +13,7 @@ classdef spm < SPM.spm
     
     properties
         Datenum;
-	%PointsPerLine;
+	NPoints;
         %Lines;
     end
     

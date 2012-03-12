@@ -134,8 +134,23 @@ while ischar(myLine)
     end
 
 
+
+    % Channels to read to rawData
+    myHeader = '#C Index';
+    myNextHeader = '#C'; % the identifier of the line after the data
+    if length(myLine) > length(myHeader)
+        if strcmp(myLine(1:length(myHeader)),myHeader)
+	        % get names of columns
+		columns=textscan(myLine,'%s','Delimiter','\t');
+		columns=strrep(columns{:},'"','');
+	end
+    end
+
 % get another line
 myLine = fgetl(fid);
 myLineIndex = myLineIndex+1;
 end
-end
+
+
+fclose(fid);
+end % End parseHeader
