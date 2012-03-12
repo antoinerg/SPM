@@ -121,36 +121,80 @@ myLineIndex = 1;
 % data lines are identified by checking if the first character of the line
 % is a number.
 while ischar(myLine)
-
     % date
     myHeader = '# Date';
-    if length(myLine) > length(myHeader)
-	if strcmp(myLine(1:length(myHeader)),myHeader)
+    if strfind(myLine,myHeader) 
 	myPattern = 'date=';
         myField = myLine((strfind(myLine,myPattern)+length(myPattern)):end);
         vp.Datenum = datenum(myField, 'ddd mmm dd HH:MM:SS');
         vp.Date = datestr(vp.Datenum);
-        end
     end
 
+    % offset
+    myHeader = '# GXSM-Main-Offset';
+    if strfind(myLine,myHeader)
+       myPattern = ' X0';
+       x0 = strfind(myLine,myPattern)+length(myPattern);
+       myPattern = ' Y0';
+       y0 = strfind(myLine,myPattern)+length(myPattern);
+       myPattern = 'Ang';
+       a = strfind(myLine,myPattern);
+       myField = myLine(x0+1:a(1)-1);
+       vp.Offset.X0 = str2num(myField);
+       myField = myLine(y0+1:a(2)-1);
+       vp.Offset.Y0 = str2num(myField);
+    end
 
+   % FB parameters
+   myHeader = '# GXSM-DSP-Control-FB';
+   if strfind(myLine,myHeader)
+     myPattern = ' Bias';
+     b(1) = strfind(myLine,myPattern)+length(myPattern);
+     myPattern = ' V';
+     b(2) = strfind(myLine,myPattern);
+     myField = myLine(b(1)+1:b(2)-1);
+     vp.Header.Bias = str2num(myField);
+     myPattern = ' Current';
+     b(1) = strfind(myLine,myPattern)+length(myPattern);
+     myPattern = ' nA';
+     b(2) = strfind(myLine,myPattern);
+     myField = myLine(b(1)+1:b(2)-1);
+     vp.Header.Current = str2num(myField);
+   end
 
-    % Channels to read to rawData
+    % comment
+    myHeader = '# GXSM-Main-Comment';
+    if strfind(myLine,myHeader)
+	    c=textscan(myLine,'# GXSM-Main-Comment\t:: comment="%s')
+	    vp.Header.Comment = c;
+    end
+    % # of points
+    myHeader = '# Probe Data Number';
+    if strfind(myLine,myHeader)
+	npoints=textscan(myLine,'# Probe Data Number\t:: N=%n');	
+	vp.NPoints = npoints{:};
+    end
+
+    % Channels to read
     myHeader = '#C Index';
-    myNextHeader = '#C'; % the identifier of the line after the data
-    if length(myLine) > length(myHeader)
-        if strcmp(myLine(1:length(myHeader)),myHeader)
+    if strfind(myLine,myHeader)
 	        % get names of columns
 		columns=textscan(myLine,'%s','Delimiter','\t');
 		columns=strrep(columns{:},'"','');
-	end
+		for i=2:length(columns)
+			vpch=SPM.parser.gxsmvp.channel(vp);
+			C=textscan(columns{i},'%s (%[^)])');
+			vpch.Name = C{1}{1};
+			try,vpch.Units = C{2}{1};catch,end
+			vpch.pos = i;
+			vp.Channel=cat(1,vp.Channel,vpch);
+		end
     end
-
+    if( (-1)==line ), eof  = 1; end % End of file condition
 % get another line
 myLine = fgetl(fid);
 myLineIndex = myLineIndex+1;
 end
-
 
 fclose(fid);
 end % End parseHeader

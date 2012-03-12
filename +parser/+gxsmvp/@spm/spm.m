@@ -14,7 +14,7 @@ classdef spm < SPM.spm
     properties
         Datenum;
 	NPoints;
-        %Lines;
+        Offset;
     end
     
     methods
