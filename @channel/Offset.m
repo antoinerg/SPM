@@ -8,7 +8,7 @@ if ~isempty(h)
     disp('From cache');
     nch=h;
 else
-    nch = SPM.format.userchannel;
+    nch = SPM.parser.userchannel;
     nch.ParentChannel=ch;
     nch.Type = 'Offset';
     nch.Name = [ch.Name ' | OFFSET (' num2str(offset) ')'];

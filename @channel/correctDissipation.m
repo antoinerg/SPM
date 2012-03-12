@@ -8,7 +8,7 @@ if ~isempty(h)
     nch=h;
 else
     if isa(ne,'SPM.channel');
-        nch = SPM.format.userchannel;
+        nch = SPM.parser.userchannel;
         nch.ParentChannel=ch;
         nch.Parameters = ne;
         nch.Type = 'correctDissipation';

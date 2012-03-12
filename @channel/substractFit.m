@@ -8,7 +8,7 @@ if ~isempty(h)
     nch=h;
 else
     if isa(fitmodel,'SPM.viewerModule.InteractiveFitModel.AbstractFitModel');
-        nch = SPM.format.userchannel;
+        nch = SPM.parser.userchannel;
         nch.ParentChannel=ch;
         nch.Parameters = fitmodel;
         nch.Type = 'substractFit';

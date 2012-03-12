@@ -7,7 +7,7 @@ if ~isempty(h)
     disp('From cache');
     nch=h;
 else
-    nch = SPM.format.userchannel;
+    nch = SPM.parser.userchannel;
     nch.Type = 'Exclude';
     nch.Parameters = name;
     nch.ParentChannel=ch;

@@ -8,7 +8,7 @@ if ~isempty(h)
     disp('From cache');
     nch=h;
 else
-    nch = SPM.format.userchannel;
+    nch = SPM.parser.userchannel;
     nch.ParentChannel=ch;
     nch.Name = [ch.Name ' | REMOVEDPOLYBG (' num2str(ordver) ',' num2str(ordhor) ')'];
     nch.spm = ch.spm;
