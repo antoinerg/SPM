@@ -1,4 +1,4 @@
-classdef nanonisspectrumchannel < SPM.channel
+classdef channel < SPM.channel
     properties(Hidden=true)
         id;
     end
@@ -9,8 +9,8 @@ classdef nanonisspectrumchannel < SPM.channel
     end
     
     methods
-        function nsch = nanonisspectrumchannel(ns)
-            if (~isa(ns,'SPM.format.nanonisspectrum')), MException('Parent must be a nanonispectrum object');end;
+        function nsch = channel(ns)
+            if (~isa(ns,'SPM.parser.nanonisspectrum.spm')), MException('Parent must be a nanonispectrum object');end;
             nsch.spm = ns;
         end
         

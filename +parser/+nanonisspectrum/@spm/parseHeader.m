@@ -22,7 +22,7 @@ eof=0;header_end=0;
     C=textscan(line,'%s','Delimiter','\t');
     C=C{1};
     for i=1:length(C)
-        ch=SPM.format.nanonisspectrumchannel(nspectrum);
+        ch=SPM.parser.nanonisspectrum.channel(nspectrum);
         s=regexp(C{i},'(.*) \((.*)\)','tokens');
         if findstr('[bwd]',C{i})
             ch.Direction='Backward';

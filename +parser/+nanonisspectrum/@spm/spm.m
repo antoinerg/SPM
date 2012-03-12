@@ -1,4 +1,4 @@
-classdef nanonisspectrum < SPM.spm
+classdef spm < SPM.spm
     % Mandatory fields for the interface
     properties(SetAccess='protected')
         Channel;
@@ -15,7 +15,7 @@ classdef nanonisspectrum < SPM.spm
     end
     
     methods
-        function nspectrum = nanonisspectrum(path)
+        function nspectrum = spm(path)
             % Loads an nanonisspectrum (.dat) file 
             nspectrum = nspectrum@SPM.spm(path);
             if nspectrum.FromCache==false
