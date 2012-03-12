@@ -100,7 +100,7 @@ sxm.Date=header.rec_date;
        if ~(isempty(str))
         result=textscan(str,'%d %s %s %s %f %f');
         
-        ch=SPM.format.sxmchannel(sxm);
+        ch=SPM.parser.sxm.channel(sxm);
         ch.Name=result{2}{1}; % Name
         ch.Units=result{3}{1}; % Units
         ch.id=result{1}; % id

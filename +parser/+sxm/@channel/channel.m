@@ -1,4 +1,4 @@
-classdef sxmchannel < SPM.channel
+classdef channel < SPM.channel
     properties(Hidden=true)
         id;
         pos;
@@ -10,8 +10,8 @@ classdef sxmchannel < SPM.channel
     end
     
     methods
-        function sxmch = sxmchannel(ns)
-            if (~isa(ns,'SPM.format.sxm')), MException('Parent must be a sxm object');end;
+        function sxmch = channel(ns)
+            if (~isa(ns,'SPM.parser.sxm.spm')), MException('Parent must be a sxm object');end;
             sxmch.spm = ns;
         end
         
