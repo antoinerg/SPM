@@ -18,9 +18,9 @@ assertEqual(s.Date,'03-Feb-2012 21:17:20');
 
 function testParseChannel(f)
 s = SPM.parser.gxsmvp.spm(f);
-assertEqual(length(s.Channel),2);
+assertEqual(length(s.Channel),4);
 
 function testChannelData(f)
 s = SPM.parser.gxsmvp.spm(f);
-assertEqual(size(s.Channel(1).Data),[256 1])
+assertEqual(size(s.Channel(1).Data),[4000 1])
 
