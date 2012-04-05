@@ -165,9 +165,10 @@ while ischar(myLine)
     % comment
     myHeader = '# GXSM-Main-Comment';
     if strfind(myLine,myHeader)
-	    c=textscan(myLine,'# GXSM-Main-Comment\t:: comment="%s')
-	    vp.Header.Comment = c;
+	    c=textscan(myLine,'# GXSM-Main-Comment\t:: comment="%s');
+	    vp.Header.Comment = c{:};
     end
+
     % # of points
     myHeader = '# Probe Data Number';
     if strfind(myLine,myHeader)

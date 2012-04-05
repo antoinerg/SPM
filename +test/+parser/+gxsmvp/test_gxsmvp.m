@@ -26,7 +26,7 @@ assertEqual(length(s.Channel),4);
 
 function testChannelData(f)
 s = SPM.load(f);
-assertEqual(size(s.Channel(1).Data),[4000 1])
+assertEqual(size(s.Channel(1).Data),[4000 1]);
 
 function testChannelNameUnit(f)
 s = SPM.load(f);
@@ -37,4 +37,4 @@ function testHeader(f)
 s = SPM.load(f);
 assertElementsAlmostEqual(s.Header.Bias,-0.05);
 assertElementsAlmostEqual(s.Header.Current,0.2);
-assertEqual(s.Header.Comment,'"Nobody@mantis\nSession Date: Wed Feb  1 22:05:04 2012\n"');
+assertEqual(s.Header.Comment,{'Nobody@mantis'});
