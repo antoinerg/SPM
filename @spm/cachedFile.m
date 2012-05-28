@@ -5,12 +5,14 @@ function [path_cached_file,cached_filename] = cachedFile(spm)
 
 cfg=SPM.config;
 [pathstr, name, ext] = fileparts(spm.Path);
-cached_filename = [cfg.Caching.Filename.Prefix spm.Filename cfg.Caching.Filename.Extension];
+file = dir(spm.Path);
+opt.Method = 'SHA-256';
+cached_filename = [SPM.lib.DataHash([file.name file.bytes file.datenum]) '.mat'];
 
-if is_absolute(cfg.Caching.CachingFolder)
-    path_cached_file = fullfile(cfg.Caching.CachingFolder,cached_filename);
+if is_absolute(cfg.Caching.Folder)
+    path_cached_file = fullfile(cfg.Caching.Folder,cached_filename);
 else
-    path_cached_file = fullfile(pathstr,cfg.Caching.CachingFolder,cached_filename);
+    path_cached_file = fullfile(pathstr,cfg.Caching.Folder,cached_filename);
 end
 
     function bool=is_absolute(path)

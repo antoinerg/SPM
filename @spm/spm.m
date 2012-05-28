@@ -56,7 +56,7 @@ classdef spm < handle
             cfg = SPM.config;
             
             % If caching enabled, look for cached file
-            if cfg.CachingEnabled == true
+            if cfg.Caching.Enabled == true
                 [path_cached_file,cached_filename] = obj.cachedFile;
                 
                 % Look if cached file exists and loads it
