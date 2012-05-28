@@ -15,7 +15,6 @@ s.UserFunctions = {'Fit(channel,name)'};
 %%%%
 s.CachingEnabled = false;
 % Prefix given to cached filename
-s.Caching.Filename.Prefix = '';
 s.Caching.Filename.Extension = '.mat';
 s.Caching.CachingFolder = '/Users/antoine/tmp'; % either an absolute path or relative path from parent directory of the file
 end
