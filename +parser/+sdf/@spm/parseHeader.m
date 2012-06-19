@@ -15,7 +15,9 @@ while (~eof)
     % Get date and type
     if (findstr('<datastream',line))
         [xml name attr] = SPM.parser.sdf.spm.parseXMLline(line);
-        sf.Date=attr.date;
+        % Parse date into a proper DateTime format
+        match=regexp(attr.date,'\w{3}, (?<date>\d+\. \w{3} \d{4}), (?<time>\d\d:\d\d)','names');
+        sf.Date=datestr(datenum([match.time ' ' match.date]),'yyyy-mm-ddTHH:MM:SS');
         sf.Type=attr.type;
     end
    

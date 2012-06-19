@@ -15,7 +15,9 @@ assertTrue(bool);
 
 function testLoad(f)
 s=SPM.load(f.image);
+assertEqual(s.Format,'sdf');
 s2=SPM.load(f.spectrum);
+assertEqual(s2.Format,'sdf');
 
 function testParseChannel(f)
 s = SPM.parser.sdf.spm(f.image);
@@ -26,5 +28,12 @@ assertEqual(length(s.Channel),16);
 function testChannelData(f)
 s = SPM.parser.sdf.spm(f.image);
 assertEqual(size(s.Channel(1).Data),[255 256]);
+assertEqual(s.Width,400);
+assertEqual(s.Height,400);
 s = SPM.parser.sdf.spm(f.spectrum);
 assertEqual(size(s.Channel(1).Data),[1 29999]);
+
+function testDate(f)
+s = SPM.parser.sdf.spm(f.image);
+assertEqual(s.Date,'2011-05-30T16:08:00');
+
