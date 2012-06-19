@@ -7,6 +7,7 @@ header(1).label='Scanner type:';
 header(2).label='Scan size:';
 header(3).label='Lines:';
 header(4).label='Samps';
+header(5).label='Date:';
 
 metadata=read_header_values(n5.Path,header);
 
@@ -15,6 +16,7 @@ n5.Width = metadata(2).values{1};
 n5.Height = metadata(2).values{1};
 n5.Lines = metadata(3).values{1};
 n5.PointsPerLine = metadata(4).values{1};
+n5.Date = metadata(5).values{1};
 
 % Get channel info
 
@@ -63,35 +65,35 @@ for i=1:nstrings
     parameters(i).values={};
 end;
 
-% Loop through header and line number of the searched string
+% Loop through header and str number of the searched string
 while( and( ~eof, ~header_end ) )
     
     byte_location = ftell(fid);
-    line = fgets(fid);
+    str = fgets(fid);
     
     for i=1:nstrings
-        if findstr(header_strings(i).label,line)
-            if (SPM.parser.nanoscope5.spm.extract_number(line))
-                b=findstr('LSB',line);
+        if findstr(header_strings(i).label,str)
+            if (SPM.parser.nanoscope5.spm.extract_number(str))
+                b=findstr('LSB',str);
                 if (b>0)
-                    parameters(i).values(parcounter(i))={SPM.parser.nanoscope5.spm.extract_number(line(b(1):end))};
+                    parameters(i).values(parcounter(i))={SPM.parser.nanoscope5.spm.extract_number(str(b(1):end))};
                 else
-                    parameters(i).values(parcounter(i))={SPM.parser.nanoscope5.spm.extract_number(line)};
+                    parameters(i).values(parcounter(i))={SPM.parser.nanoscope5.spm.extract_number(str)};
                 end;
             else
-                b= findstr(line,'"');
-                c= findstr(line,':');
+                b= findstr(str,'"');
+                c= findstr(str,':');
                 if (b>0)
-                    parameters(i).values(parcounter(i))={line(b(1)+1:b(2)-1)};
+                    parameters(i).values(parcounter(i))={str(b(1)+1:b(2)-1)};
                 elseif (c>0)
-                    parameters(i).values(parcounter(i))={strtrim(line(c(1)+1:end))};
+                    parameters(i).values(parcounter(i))={strtrim(str(c(1)+1:end))};
                 end;
             end;
             parcounter(i)=parcounter(i)+1;
         end
         
-        if( (-1)==line ) eof  = 1; end % End of file condition
-        if length( findstr(line,'\*File list end')) header_end = 1; end % End of header section condition
+        if( (-1)==str ) eof  = 1; end % End of file condition
+        if length( findstr(str,'\*File list end')) header_end = 1; end % End of header section condition
         
     end
 end

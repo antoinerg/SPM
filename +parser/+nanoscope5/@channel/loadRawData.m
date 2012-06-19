@@ -13,7 +13,6 @@ while (~eof)
     fseek(fid,n5ch.pos,-1); 
     rawData = fread(fid, [n5.PointsPerLine n5.Lines],'int16');
     eof=1;
-    if( (-1)==line ) eof  = 1; end % End of file condition
 end
 fclose(fid);
 
