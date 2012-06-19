@@ -202,9 +202,9 @@ end
 %% save java DOM tree to XML file
 if (~isempty(filename))
   if (strcmpi(DPref.XmlEngine, 'Xerces'))
-    xmlwrite_xerces(filename, DOMnode);
+    SPM.lib.xml_io_tools.xmlwrite_xerces(filename, DOMnode);
   else
-    xmlwrite(filename, DOMnode);
+    SPM.lib.xml_io_tools.xmlwrite(filename, DOMnode);
   end
 end
 
