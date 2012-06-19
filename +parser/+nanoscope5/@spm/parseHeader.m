@@ -11,15 +11,17 @@ header(5).label='Date:';
 
 metadata=read_header_values(n5.Path,header);
 
-n5.Type = metadata(1).values;
+n5.Type = metadata(1).values{1};
 n5.Width = metadata(2).values{1};
 n5.Height = metadata(2).values{1};
 n5.Lines = metadata(3).values{1};
 n5.PointsPerLine = metadata(4).values{1};
-n5.Date = metadata(5).values{1};
+
+% Transform date into DateTime format
+match=regexp(metadata(5).values{1},'(?<time>\d\d:\d\d:\d\d [AP]M) \w{3} (?<date>\w{3} \d\d \d{4})','names');
+n5.Date=datestr(datenum([match.time match.date]),'yyyy-mm-ddTHH:MM:SS');
 
 % Get channel info
-
 header(1).label='@2:Z scale:';
 header(2).label='Data offset';
 header(3).label='Image Data:';
@@ -51,6 +53,17 @@ end
 %
 %%%%
 
+% Function to extract value
+function value = extract_value(str)
+b= findstr(str,'"');
+c= findstr(str,':');
+if (b>0)
+    value={str(b(1)+1:b(2)-1)};
+elseif (c>0)
+    value={strtrim(str(c(1)+1:end))};
+end;
+end
+
 % Function to parse the headers
 function [parameters] = read_header_values(filename, header_strings)
 % Open the file
@@ -73,7 +86,9 @@ while( and( ~eof, ~header_end ) )
     
     for i=1:nstrings
         if findstr(header_strings(i).label,str)
-            if (SPM.parser.nanoscope5.spm.extract_number(str))
+            if (strcmp(header_strings(i).label,'Date:'))
+                parameters(i).values(parcounter(i))=extract_value(str);
+            elseif (SPM.parser.nanoscope5.spm.extract_number(str))
                 b=findstr('LSB',str);
                 if (b>0)
                     parameters(i).values(parcounter(i))={SPM.parser.nanoscope5.spm.extract_number(str(b(1):end))};
@@ -81,13 +96,7 @@ while( and( ~eof, ~header_end ) )
                     parameters(i).values(parcounter(i))={SPM.parser.nanoscope5.spm.extract_number(str)};
                 end;
             else
-                b= findstr(str,'"');
-                c= findstr(str,':');
-                if (b>0)
-                    parameters(i).values(parcounter(i))={str(b(1)+1:b(2)-1)};
-                elseif (c>0)
-                    parameters(i).values(parcounter(i))={strtrim(str(c(1)+1:end))};
-                end;
+                parameters(i).values(parcounter(i))=extract_value(str);
             end;
             parcounter(i)=parcounter(i)+1;
         end

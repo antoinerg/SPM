@@ -21,7 +21,7 @@ classdef spm < SPM.spm
             % Loads an SDF file with given filename sdf(filename)
             n5 = n5@SPM.spm(path);
             if n5.FromCache==false
-                n5.Format='spm';
+                n5.Format='nanoscope5';
                 parseHeader(n5);
             end
         end

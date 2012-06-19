@@ -20,9 +20,9 @@ function testChannelData(f)
 s = SPM.parser.nanoscope5.spm(f);
 assertEqual(size(s.Channel(1).Data),[512 512])
 
-% function testDate(f)
-% s = SPM.parser.nanoscope5.spm(f);
-% assertEqual(s.Date,'2011-05-10T19:55:23');
+function testDate(f)
+s = SPM.parser.nanoscope5.spm(f);
+assertEqual(s.Date,'2011-05-10T19:55:23');
 
 function testDimension(f)
 s = SPM.parser.nanoscope5.spm(f);
