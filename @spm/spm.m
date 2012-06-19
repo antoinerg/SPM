@@ -1,4 +1,4 @@
-classdef spm < handle
+classdef spm < hgsetget
     %Abstract class representing a scan
     % SPM Properties:
     %   Date - Date of acquisition
@@ -29,21 +29,22 @@ classdef spm < handle
     end
     
     properties(Hidden=true,SetAccess=protected)
-        UserDataFile; % Absolute filepath to XML with UserData
+        XMLDataFile; % Absolute filepath to XML with UserData
+        Path; % Absolute filepath
+        FromCache=false; % Read from cache?
     end
     
     properties(SetAccess=protected)
-        FromCache=false; % Read from cache?
         Filename; % Filename
-        Path; % Absolute filepath
         Header=struct; % Headers of the file
+        Hash; % Compute unique hash for the file
     end
     
     properties
         UserChannel; % Array of userchannel object
     end
     properties(Dependent=true,SetAccess=protected)
-        UserData;
+        %UserData;
     end
     
     methods
@@ -51,7 +52,7 @@ classdef spm < handle
             % Sanitize file path and try loading from cache 
             [pathstr, name, ext] = fileparts(path);
             obj.Path = GetFullPath(path);
-            obj.UserDataFile = [obj.Path '.xml'];
+            obj.XMLDataFile = [obj.Path '.xml'];
             obj.Filename = [name ext];
             cfg = SPM.config;
             
@@ -87,6 +88,7 @@ classdef spm < handle
         getChannelInfo(spm)
         Save(spm)
         Delete(spm)
+        XMLdump(spm)
     end
     
     methods(Static=true)
@@ -113,9 +115,20 @@ classdef spm < handle
     end
     
     methods
-        function s=get.UserData(spm)
-            % Sanitize file path and try loading from cache
-            s=SPM.xml_io_tools.xml_read(spm.UserDataFile)
+        function value=get.Hash(spm)
+            [pathstr, name, ext] = fileparts(spm.Path);
+            file = dir(spm.Path);
+            opt.Method = 'SHA-256';
+            opt.Format = 'hex';
+            value = SPM.lib.DataHash([file.name num2str(file.bytes) file.date],opt);
+        end
+        
+        function s=XML(spm)
+            if (exist(spm.XMLDataFile,'file')==2)
+              s=SPM.lib.xml_io_tools.xml_read(spm.XMLDataFile);
+            else
+              s=[];
+            end
         end
     end
     

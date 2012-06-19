@@ -1,9 +1,12 @@
-classdef channel < handle
+classdef channel < hgsetget
     properties
         Name
         Units
-        spm
         Direction='Forward';
+    end
+    
+    properties(Hidden=true,SetAccess='protected')
+        spm 
     end
     
     properties(Abstract=true,Hidden=true,SetAccess='protected')

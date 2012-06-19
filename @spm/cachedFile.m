@@ -4,10 +4,7 @@ function [path_cached_file,cached_filename] = cachedFile(spm)
 %(whether it exists or not).
 
 cfg=SPM.config;
-[pathstr, name, ext] = fileparts(spm.Path);
-file = dir(spm.Path);
-opt.Method = 'SHA-256';
-cached_filename = [SPM.lib.DataHash([file.name file.bytes file.datenum]) '.mat'];
+cached_filename = [spm.Hash '.mat'];
 
 if is_absolute(cfg.Caching.Folder)
     path_cached_file = fullfile(cfg.Caching.Folder,cached_filename);
