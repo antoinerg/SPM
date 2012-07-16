@@ -19,7 +19,7 @@ original=spm.XML;
 % Final is original with overwritten "Package" part
 final = setfield(original,'Package',f);
 
-SPM.lib.xml_io_tools.xml_write(spm.UserDataFile,final,'SPM',Pref);
+SPM.lib.xml_io_tools.xml_write(spm.XMLDataFile,final,'SPM',Pref);
 
 end
 
