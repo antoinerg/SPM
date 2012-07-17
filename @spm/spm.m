@@ -51,7 +51,7 @@ classdef spm < hgsetget
     methods
         function obj=spm(path)
             % Sanitize file path and try loading from cache 
-            obj.Path = GetFullPath(path);
+            obj.Path = SPM.lib.GetFullPath(path);
             [pathstr, name, ext] = fileparts(obj.Path);
             obj.XMLDataFile = [obj.Path '.xml'];
             obj.Filename = [name ext];
