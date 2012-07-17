@@ -25,6 +25,7 @@ fseek(fid, im_nr*size, 0);
 pix = header.scan_pixels;
 data = fread(fid, [pix(1) pix(2)], 'float');
 data = transpose(data);
+data = flipud(data);
 
 fclose(fid);
 
