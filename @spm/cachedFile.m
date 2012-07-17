@@ -9,7 +9,7 @@ cached_filename = [spm.Hash '.mat'];
 if is_absolute(cfg.Caching.Folder)
     path_cached_file = fullfile(cfg.Caching.Folder,cached_filename);
 else
-    path_cached_file = fullfile(pathstr,cfg.Caching.Folder,cached_filename);
+    path_cached_file = fullfile(spm.Directory,cfg.Caching.Folder,cached_filename);
 end
 
     function bool=is_absolute(path)

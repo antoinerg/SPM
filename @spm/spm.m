@@ -31,6 +31,7 @@ classdef spm < hgsetget
     properties(Hidden=true,SetAccess=protected)
         XMLDataFile; % Absolute filepath to XML with UserData
         Path; % Absolute filepath
+        Directory; % Directory the file is in
         FromCache=false; % Read from cache?
     end
     
@@ -50,10 +51,11 @@ classdef spm < hgsetget
     methods
         function obj=spm(path)
             % Sanitize file path and try loading from cache 
-            [pathstr, name, ext] = fileparts(path);
             obj.Path = GetFullPath(path);
+            [pathstr, name, ext] = fileparts(obj.Path);
             obj.XMLDataFile = [obj.Path '.xml'];
             obj.Filename = [name ext];
+            obj.Directory = pathstr;
             cfg = SPM.config;
             
             % If caching enabled, look for cached file
