@@ -9,6 +9,13 @@ end
 f=rmfield(f,'Channel');
 f=setfield(f,'Channel',Channel);
 
+for i=1:length(spm.UserChannel)
+    uc=get(spm.UserChannel(i));
+    UserChannel(i)=rmfield(uc,'ParentChannel');
+end
+f=rmfield(f,'UserChannel');
+f=setfield(f,'UserChannel',UserChannel);
+
 Pref=[]; Pref.XmlEngine = 'Xerces';  % use Xerces xml generator directly
 Pref.StructItem=false;
 
