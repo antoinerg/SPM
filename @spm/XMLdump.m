@@ -4,7 +4,7 @@ function XMLdump(spm)
 f=get(spm);
 
 for i=1:length(spm.Channel)
-    Channel(i)=get(spm.Channel(1));
+    Channel(i)=get(spm.Channel(i));
 end
 f=rmfield(f,'Channel');
 f=setfield(f,'Channel',Channel);

@@ -32,13 +32,13 @@ classdef spm < hgsetget
         XMLDataFile; % Absolute filepath to XML with UserData
         Path; % Absolute filepath
         Directory; % Directory the file is in
-        FromCache=false; % Read from cache?
     end
     
     properties(SetAccess=protected)
         Filename; % Filename
         Header=struct; % Headers of the file
         Hash; % Compute unique hash for the file
+        FromCache=false; % Read from cache?
     end
     
     properties
@@ -74,7 +74,7 @@ classdef spm < hgsetget
                     % Make sure the cached path is defined in current
                     % filesystem (in case it was saved on a different
                     % system)
-                    obj.Path = GetFullPath(path);
+                    obj.Path = SPM.lib.GetFullPath(path);
                     
                     % Flagged in order to skip file parsing in subclass
                     obj.FromCache = true;
