@@ -16,5 +16,5 @@ switch n5ch.Name
         n5ch.Units='Current';
         finalscaling=(n5ch.scaling)/(2^16);
 end;
-n5ch.Data = finalscaling*n5ch.rawData;
+n5ch.Data = flipud(finalscaling*n5ch.rawData); % Needed to have same orientation as on gwyddion
 end
