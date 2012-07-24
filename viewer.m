@@ -7,7 +7,7 @@ classdef viewer < handle
     methods
         function obj = viewer
             obj.Figure=figure('Visible','on');
-            set(obj.Figure,'Toolbar','none','menubar','none');
+            %set(obj.Figure,'Toolbar','none','menubar','none');
         end
         
         function v=add(v,ch,varargin)
@@ -26,7 +26,7 @@ classdef viewer < handle
         end
       
         function export(v,path)
-            saveas(v.Figure,strcat(path,'.png'),'png');
+            print(v.Figure,'-dpng','-r72',path);
         end
         
         function draw(v)

@@ -28,23 +28,20 @@ classdef view < handle
         
         function plotImage(v)
             ch=v.Channel;
-            %colormap(gold);
+            
+            % Using pcolor
             %v.Handle=pcolor(v.Channel.Data,'Parent',v.Axes);
-            %shading interp;
-            v.Handle=imshow(ch.Data,'Parent',v.Axes,'Colormap',SPM.viewerModule.gold);
+            %shading flat;
+                        
+            % Using imshow
+            %v.Handle=imshow(ch.Data,'Parent',v.Axes,'Colormap',SPM.viewerModule.gold);
             
-            % Set axes
-            xreal=ch.spm.Height;
-            yreal=ch.spm.Width;
-            
-            % Set tick
-            nb_ticks=2;
-            [m,n]=size(ch.Data);
-            set(v.Axes,'XTick',0:m/nb_ticks:m,'XTickLabel',num2cell(0:floor(xreal/nb_ticks):xreal),'Visible','on');
-            set(v.Axes,'YTick',0:n/nb_ticks:n,'YTickLabel',num2cell(0:floor(yreal/nb_ticks):yreal));
-            set(v.Axes,'CLimMode','auto');
+            % Using imagesc
+            v.Handle=imagesc(ch.Data,'Parent',v.Axes);
+           
             v.attachContextMenu;
             v.showTitle;
+            SPM.viewerModule.styleImage(v);
         end
         
         function plotSpectrum(v)
