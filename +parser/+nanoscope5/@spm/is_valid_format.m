@@ -7,7 +7,7 @@ try
     line=fgets(fid);
     a=findstr('\*File list',line);
     line=fgets(fid);
-    b=findstr('\Version: 0x05120005',line);
+    b=findstr('\Version: 0x05',line); % Any version 5 file should be fine
     
     fclose(fid);
 catch err
