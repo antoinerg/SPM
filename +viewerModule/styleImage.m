@@ -31,8 +31,8 @@ c_bar=colorbar('location','east');
 set(c_bar,'YColor','white','XColor','white');
 
 %% Figure size
-width=x;
-height=y;
+width=512;
+height=512;
 set(fig,'Position',[0 0 width height]); % Size in pixels
 
 %% Fonts
