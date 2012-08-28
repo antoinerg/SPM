@@ -191,7 +191,7 @@ while ischar(myLine)
 			vp.Channel=cat(1,vp.Channel,vpch);
 		end
     end
-    if( (-1)==line ), eof  = 1; end % End of file condition
+    if( (-1)==myLine ), eof  = 1; end % End of file condition
 % get another line
 myLine = fgetl(fid);
 myLineIndex = myLineIndex+1;
