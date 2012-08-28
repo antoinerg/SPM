@@ -7,7 +7,7 @@ classdef viewer < handle
     methods
         function obj = viewer
             obj.Figure=figure('Visible','on');
-            set(obj.Figure,'Toolbar','none','menubar','none');
+            %set(obj.Figure,'Toolbar','none','menubar','none');
         end
         
         function v=add(v,ch,varargin)
@@ -26,7 +26,25 @@ classdef viewer < handle
         end
       
         function export(v,path)
-            saveas(v.Figure,strcat(path,'.png'),'png');
+            print(v.Figure,'-dpng','-r72',path);
+            
+            f=[];
+            view=[];
+            for i=1:length(v.Child)
+               ch=v.Child(i).Channel;
+               view = struct('Position',i,'Name',ch.Name,'Direction',ch.Direction,'ParentHash',ch.spm.Hash);
+            end
+            f=setfield(f,'View',view);
+                        % Prepare final XML to be written
+            final = [];
+            % Information ends up inside a "Viewer" element
+            final = setfield(final,'Viewer',f);
+            final.Viewer.ATTRIBUTE.filename = path;
+            
+            % Writing the XML
+            Pref=[]; Pref.XmlEngine = 'Xerces';  % use Xerces xml generator directly
+            Pref.StructItem=false;
+            SPM.lib.xml_io_tools.xml_write([path '.xml'],final,'SPM',Pref);
         end
         
         function draw(v)
