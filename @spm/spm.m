@@ -132,6 +132,10 @@ classdef spm < hgsetget
               s=[];
             end
         end
+        
+        function value=get.XMLDataFile(spm)
+            value = [spm.Path '.xml'];
+        end
     end
     
     methods(Access=protected)
