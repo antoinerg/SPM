@@ -18,6 +18,7 @@ else
     
     % Call interactive GUI
     v=SPM.viewerModule.spectrumSelection(ch,varargin{:});
+    v.draw;
     set(v.Figure,'Name','EXCLUDE DATA POINTS','NumberTitle','off');
     
     % Disp instructions
