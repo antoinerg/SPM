@@ -70,9 +70,9 @@ classdef fermi < SPM.viewerModule.InteractiveFitModel.AbstractFitModel
             if isempty(fitModel.fitOptions)                
                 % Prepare the fitOptions object
                 fo = fitoptions(fitModel.fitType);
-                fo.Startpoint=[0 0.5 1];
+                fo.Startpoint=[0 0.001 1];
                 fo.Lower=[-10 0 0];
-                fo.Upper=[10 Inf Inf];
+                fo.Upper=[10 1 Inf];
                 fo.Robust='on';
                 fo.MaxIter=1e7;
                 fitModel.fitOptions = fo;

@@ -39,7 +39,7 @@ set(fig,'Position',[0 0 width height]); % Size in pixels
 set(ax,'FontName','Arial','FontSize',12,'FontWeight','bold');
 
 %% Vertical axis
-set(v.Axes,'CLim',[-5 5]);
+%set(v.Axes,'CLim',[-5 5]);
 
 %% Printing / saving
 dpi = 72;
