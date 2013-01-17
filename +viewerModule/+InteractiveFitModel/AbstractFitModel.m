@@ -9,14 +9,17 @@ classdef AbstractFitModel < handle
     
     properties
         Box;
-        fitLine;
         fit;
     end
     
+    properties(Transient=true)
+       fitLine; 
+    end
+    
     properties (Dependent = true, SetAccess = private)
-        Axes
-        Infobox
-        fitPanel
+        Axes;
+        Infobox;
+        fitPanel;
     end
     
     

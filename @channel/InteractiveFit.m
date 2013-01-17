@@ -1,4 +1,4 @@
-function sS=InteractiveFit(channel,varargin)
+function ss=InteractiveFit(channel,varargin)
 % Call interactive GUI
-sS=SPM.viewerModule.InteractiveFitGUI(channel,varargin{:});
+ss=SPM.viewerModule.InteractiveFitGUI(channel,varargin{:});
 end

@@ -1,12 +1,15 @@
 classdef spectrumSelection < handle
     properties
-        Line;
         selectedBox;
         selectionBox;
         xChannel;
+        Channel;
+    end
+
+    properties(Transient=true)
         Figure;
         Axes;
-        Channel;
+        Line;
     end
     
     events
@@ -42,7 +45,7 @@ classdef spectrumSelection < handle
             sV.Channel=ych;
             sV.xChannel=xch;
             
-            sV.draw;
+            %sV.draw;
         end
         
         function draw(sV)
@@ -115,16 +118,10 @@ classdef spectrumSelection < handle
             set(sV.Axes,'YLimMode','auto');
         end
         
-%         function b=saveobj(a)
-%             b=a;
-%             hgsave(a.Figure,'fig');
-%         end
     end
     
     methods(Static=true)
-%         function b=loadobj(a)
-%             b.Figure=hgload('fig');
-%         end 
+
     end
     
     methods(Access=private)
