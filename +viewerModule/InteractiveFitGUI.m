@@ -7,7 +7,6 @@ classdef InteractiveFitGUI < SPM.viewerModule.spectrumSelection
         function ifit = InteractiveFitGUI(channel,varargin)
             % Call spectrum selection constructor
             ifit=ifit@SPM.viewerModule.spectrumSelection(channel,varargin{:});
-            ifit.draw;
         end
     end
     
