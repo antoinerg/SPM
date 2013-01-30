@@ -34,7 +34,7 @@ end
 
     function terminate
         baseline_fit=ss.corrected_data;
-        nch.setData(ch.Data - baseline_fit);
+        nch.setData(ch.Data./baseline_fit-1);
         
         % Append to spm object
         ch.spm.UserChannel = cat(1,ch.spm.UserChannel,nch);

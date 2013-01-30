@@ -1,6 +1,6 @@
 classdef InteractiveFitGUI < SPM.viewerModule.spectrumSelection
     properties
-        fitModelList = {'polynomial' 'fermi'};
+        fitModelList = {'fermi_offset' 'fermi' 'polynomial'};
     end
     
     methods

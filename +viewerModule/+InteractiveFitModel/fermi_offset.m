@@ -1,14 +1,14 @@
-classdef fermi < SPM.viewerModule.InteractiveFitModel.AbstractFitModel
+classdef fermi_offset < SPM.viewerModule.InteractiveFitModel.AbstractFitModel
     %Classical regime as presented in Lynda's thesis
     
     properties
-        Name='fermi';
+        Name='fermi_offset';
         fitType;
         fitOptions=[];
     end
     
     methods
-        function obj=fermi(box)
+        function obj=fermi_offset(box)
             obj = obj@SPM.viewerModule.InteractiveFitModel.AbstractFitModel(box);
         end
         
@@ -63,7 +63,7 @@ classdef fermi < SPM.viewerModule.InteractiveFitModel.AbstractFitModel
             factor=q/(2*kb*T);
             %fermi=1/(exp(alpha*(x-Vo))+1);
             %eqn=c*fermi*(1-fermi)+b;
-            eqn=c*cosh(factor*alpha*(x-Vo))^-2;
+            eqn=c*cosh(factor*alpha*(x-Vo))^-2+b;
             eqn=SPM.viewerModule.InteractiveFitModel.sym2str(eqn);
             out=fittype(eqn);
         end
@@ -72,9 +72,9 @@ classdef fermi < SPM.viewerModule.InteractiveFitModel.AbstractFitModel
             if isempty(fitModel.fitOptions)                
                 % Prepare the fitOptions object
                 fo = fitoptions(fitModel.fitType);
-                fo.Startpoint=[0 0.001 1];
-                fo.Lower=[-10 0 0];
-                fo.Upper=[10 1 Inf];
+                fo.Startpoint=[0 0.001 1 0];
+                fo.Lower=[-10 0 0 0];
+                fo.Upper=[10 1 Inf Inf];
                 fo.Robust='on';
                 fo.MaxIter=1e7;
                 fitModel.fitOptions = fo;
