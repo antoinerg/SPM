@@ -72,8 +72,14 @@ classdef spectrumSelection < handle
             % If retrieving a saved session, redraw all boxes
             if ~isempty(sV.selectionBox)
                for i=1:length(sV.selectionBox)
+                   sV.selectionBox(i).handle = [];
                    sV.selectionBox(i).draw;
-                   sV.selectionBox(i).attachUI;
+                   % Reattach the UI manually in your child object
+                   % This was needed to prevent race condition since the
+                   % children object might not have all its UI element
+                   % drawn yet.
+                   % 
+                   % sV.selectionBox(i).attachUI;
                end
             end
         end

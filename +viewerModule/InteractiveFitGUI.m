@@ -139,12 +139,12 @@ classdef InteractiveFitGUI < SPM.viewerModule.spectrumSelection
                 set(fitMenu,'Value',id);
                 fitModel.display;
             end
-            
                         
             % If retrieving a saved session, redraw all fits
             if ~isempty(ifit.selectionBox)
                for i=1:length(ifit.selectionBox)
                  box = ifit.selectionBox(i);
+                 box.attachUI;
                  box.UserData.fitModel.plot;
                end
             end
