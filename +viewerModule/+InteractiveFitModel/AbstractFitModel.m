@@ -13,7 +13,7 @@ classdef AbstractFitModel < handle
     end
     
     properties(Transient=true)
-       fitLine; 
+        fitLine;
     end
     
     properties (Dependent = true, SetAccess = private,Hidden=true)
@@ -81,7 +81,17 @@ classdef AbstractFitModel < handle
             fitModel.fitLine=line(range,feval(fitModel.fit,range),'Parent',fitModel.Axes,'color','r',...
                 'linewidth',2,'HitTest','off');
         end
+        
+        function s=summary(fitModel)
+            s=struct;
+            cname=coeffnames(fitModel.fit);
+            cvalue=coeffvalues(fitModel.fit);
+            for i=1:length(cname)
+                s = setfield(s,cname{i},cvalue(i));
+            end
+        end
     end
+    
     
     methods(Abstract=true)
         fitData(obj);

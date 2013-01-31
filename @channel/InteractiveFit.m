@@ -4,11 +4,11 @@ h=findobj(ch.spm.UserChannel,'Type','InteractiveFit','-and','ParentChannel',ch);
 if ~isempty(h)
     nch = h;
     disp('From cache');
-    ss = h.UserData;
+    ss = h.UserObj;
     ss.draw;
     set(ss.Figure,'KeyPressFcn',@keyPress);
     uiwait(ss.Figure);
-    nch.UserData = ss;
+    update;
     disp('Done');
 else
     nch = SPM.parser.userchannel;
@@ -27,7 +27,7 @@ else
     set(ss.Figure,'KeyPressFcn',@keyPress);
     disp('Fit your stuff and press s when done');
     uiwait(ss.Figure);
-    nch.UserData = ss;
+    update;
     terminate;
     
 end
@@ -37,6 +37,14 @@ end
             % Close the figure
             close(ss.Figure);
         end
+    end
+
+    function update
+       nch.UserObj = ss;
+       nch.UserData.Fit = [];
+       for i=1:length(ss.selectionBox)
+           nch.UserData.Fit = cat(1,nch.UserData.Fit,ss.selectionBox(i).UserData.fitModel.summary);
+       end
     end
 
     function terminate
