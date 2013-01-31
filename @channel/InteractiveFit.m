@@ -8,7 +8,6 @@ if ~isempty(h)
     ss.draw;
     set(ss.Figure,'KeyPressFcn',@keyPress);
     uiwait(ss.Figure);
-    update;
     nch.UserData = ss;
     disp('Done');
 else
@@ -28,6 +27,7 @@ else
     set(ss.Figure,'KeyPressFcn',@keyPress);
     disp('Fit your stuff and press s when done');
     uiwait(ss.Figure);
+    nch.UserData = ss;
     terminate;
     
 end

@@ -16,7 +16,7 @@ classdef AbstractFitModel < handle
        fitLine; 
     end
     
-    properties (Dependent = true, SetAccess = private)
+    properties (Dependent = true, SetAccess = private,Hidden=true)
         Axes;
         Infobox;
         fitPanel;
