@@ -133,6 +133,14 @@ classdef spm < hgsetget
             end
         end
         
+        function s=XML_XInclude(spm)
+            if (exist(spm.XMLDataFile,'file')==2)
+              s=SPM.xml_read_xinclude(spm.XMLDataFile);
+            else
+              s=[];
+            end
+        end
+        
         function value=get.XMLDataFile(spm)
             value = [spm.Path '.xml'];
         end
