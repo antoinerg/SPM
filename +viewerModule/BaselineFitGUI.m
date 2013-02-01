@@ -90,7 +90,7 @@ classdef BaselineFitGUI < handle
                     xi = 1:length(sV.Channel.Data);
                     yi = interp1(x,y,xi,'pchip');
             else
-                yi = zeros(length(sV.Channel.Data));
+                yi = [];
             end
         end
         

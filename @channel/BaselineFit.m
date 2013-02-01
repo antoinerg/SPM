@@ -34,10 +34,14 @@ end
 
     function terminate
         baseline_fit=ss.corrected_data;
+        if isempty(baseline_fit)
+            nch = ch;
+        else
         nch.setData(ch.Data./baseline_fit-1);
         
         % Append to spm object
         ch.spm.UserChannel = cat(1,ch.spm.UserChannel,nch);
+        end
         disp('Done');
     end
 end
