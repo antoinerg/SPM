@@ -1,27 +1,28 @@
 function nch=BaselineFit(ch,varargin)
-h=findobj(ch.spm.UserChannel,'Type','BaselineFit','-and','ParentChannel',ch);
+h=findobj(ch.spm.UserChannel,'Type','ManualFit','-and','ParentChannel',ch);
 
 if ~isempty(h)
     disp('From cache');
     nch=h;
 else
     nch = SPM.parser.userchannel;
-    nch.Type = 'BaselineFit';
+    nch.Type = 'ManualFit';
     nch.ParentChannel=ch;
-    nch.Name = [ch.Name ' | Subtracted baseline '];
+    nch.Name = [ch.Name ' | Manual fit'];
     nch.Units = ch.Units;
     nch.spm = ch.spm;
     nch.Direction = ch.Direction;
     
     % Call interactive GUI
-    ss=SPM.viewerModule.BaselineFitGUI(ch);
+    ss=SPM.viewerModule.ManualFitGUI(ch);
     ss.draw;
-    set(ss.Figure,'Name','Baseline fitting','NumberTitle','off');
+    set(ss.Figure,'Name','Manual fitting','NumberTitle','off');
     
     % Disp instructions
     set(ss.Figure,'KeyPressFcn',@keyPress);
-    disp('Add points on baseline and press s when done');
+    disp('Add points on plot and press s when done');
     uiwait(ss.Figure);
+    update;
     terminate;  
 end
 
@@ -32,12 +33,16 @@ end
         end
     end
 
+    function update
+       nch.UserObj = ss; 
+    end
+
     function terminate
-        baseline_fit=ss.corrected_data;
-        if isempty(baseline_fit)
+        manual_fit=ss.corrected_data;
+        if isempty(manual_fit)
             nch = ch;
         else
-        nch.setData(ch.Data./baseline_fit-1);
+        nch.setData(manual_fit);
         
         % Append to spm object
         ch.spm.UserChannel = cat(1,ch.spm.UserChannel,nch);

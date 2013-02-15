@@ -1,7 +1,7 @@
 function nch=correctDissipation(channel,ne)
 %Correct dissipation
 ch=channel;
-h=findobj(ch.spm.UserChannel,'Type','correctDissipation','-and','ParentChannel',ch);
+h=findobj(ch.spm.UserChannel,'Type','correctDissipation','-and','ParentChannel',ch,'Parameters',ne);
 
 if ~isempty(h)
     disp('From cache');

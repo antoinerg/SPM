@@ -1,4 +1,4 @@
-classdef BaselineFitGUI < handle
+classdef ManualFitGUI < handle
     properties
         selectedPoint;
         selectionPoint;
@@ -21,7 +21,7 @@ classdef BaselineFitGUI < handle
     end
     
     methods
-        function ifit = BaselineFitGUI(channel,varargin)
+        function ifit = ManualFitGUI(channel,varargin)
             % Call spectrum selection constructor
             ifit.Channel=channel;
         end
