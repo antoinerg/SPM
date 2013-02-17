@@ -59,11 +59,10 @@ classdef fermi_offset < SPM.viewerModule.InteractiveFitModel.AbstractFitModel
             x=sym('x');Vo=sym('Vo');c=sym('c');beta=sym('beta');b=sym('b');
             kb=1.3806488E-23;
             q=1.602176565E-19;
-            %T=77;
             factor=q/(2*kb);
-            %fermi=1/(exp(alpha*(x-Vo))+1);
-            %eqn=c*fermi*(1-fermi)+b;
+            
             eqn=c*cosh(factor*beta*(x-Vo))^-2+b;
+            
             eqn=SPM.viewerModule.InteractiveFitModel.sym2str(eqn);
             out=fittype(eqn);
         end
