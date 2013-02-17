@@ -41,6 +41,7 @@ end
         manual_fit=ss.corrected_data;
         if isempty(manual_fit)
             nch = ch;
+            return;
         else
         nch.setData(manual_fit);
         

@@ -49,7 +49,9 @@ end
 
     function terminate
         % Append to spm object
-        ch.spm.UserChannel = cat(1,ch.spm.UserChannel,nch);
+        if ~isempty(nch.UserData.Fit)
+            ch.spm.UserChannel = cat(1,ch.spm.UserChannel,nch);
+        end
         disp('Done');
     end
 end
