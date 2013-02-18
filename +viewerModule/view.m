@@ -70,6 +70,7 @@ classdef view < handle
             v.Handle=fplot;
             v.attachContextMenu;
             v.showTitle;
+            SPM.viewerModule.styleSpectrum(v);
         end
         
         function showTitle(v)

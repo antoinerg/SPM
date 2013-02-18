@@ -54,7 +54,7 @@ set(c_bar,'YColor','black','XColor','black');
 %set(fig,'Position',[0 0 width height]); % Size in pixels
 
 %% Fonts
-set(ax,'FontName','Helvetica','FontSize',14,'FontWeight','bold');
+set(ax,'FontName','Helvetica','FontSize',12,'FontWeight','bold');
 
 %% Vertical axis
 %set(v.Axes,'CLim',[-5 5]);
