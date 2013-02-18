@@ -6,6 +6,7 @@ classdef view < handle
         Channel;
         xChannel=[];
         ContextualMenu;
+        Type;
     end
     
     methods
