@@ -84,9 +84,11 @@ classdef InteractiveFitGUI < SPM.viewerModule.spectrumSelection
             % Callback
             function changeFitModel(src,evt)
                 box=ifit.selectedBox;
-                delete(box.UserData.fitModel.fitLine);
-                setFitModel(get(src,'Value'));
-                notify(ifit,'selectionBoxChanged');
+                if ~isempty(box)
+                    delete(box.UserData.fitModel.fitLine);
+                    setFitModel(get(src,'Value'));
+                    notify(ifit,'selectionBoxChanged');
+                end
             end
             
             %     function changeStartPoint(src,evt,i)
