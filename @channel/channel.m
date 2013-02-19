@@ -17,7 +17,7 @@ classdef channel < hgsetget
     methods
        
         function nch=copyChannel(ch)
-            nch = SPM.format.userchannel;
+            nch = SPM.parser.userchannel;
             nch.ParentChannel=ch;
             nch.Type = '';
             nch.Name = ch.Name;

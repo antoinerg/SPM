@@ -3,8 +3,6 @@ classdef selectionBox < handle
         c1; % coordinates of corner 1
         c2; % coordinates of corner 2
         Parent; % handle to the parent object
-        markersHandle; % handles of the markers accessed by selectionBoxMarker
-        ContextualMenu;
         UserData;
     end
     
@@ -12,6 +10,8 @@ classdef selectionBox < handle
         handle; % graphic handle
         Axes;
         Figure;
+        markersHandle; % handles of the markers accessed by selectionBoxMarker
+        ContextualMenu;
     end
     
     properties(Access=private)

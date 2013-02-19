@@ -12,11 +12,11 @@ classdef AbstractFitModel < handle
         fit;
     end
     
-    properties(Transient=true)
+    properties(Transient=true,Hidden=true)
         fitLine;
     end
     
-    properties (Dependent = true, SetAccess = private,Hidden=true)
+    properties (Dependent = true, SetAccess = private,Hidden=true,Transient=true)
         Axes;
         Infobox;
         fitPanel;
