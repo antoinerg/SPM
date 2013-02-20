@@ -122,7 +122,7 @@ classdef spm < hgsetget
             file = dir(spm.Path);
             opt.Method = 'SHA-256';
             opt.Format = 'hex';
-            value = SPM.lib.DataHash([file.name num2str(file.bytes) file.date],opt);
+            value = SPM.lib.DataHash([file.name num2str(file.bytes)],opt);
         end
         
         function s=XML(spm)
