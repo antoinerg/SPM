@@ -10,7 +10,7 @@ else
     if isa(fitmodel,'SPM.viewerModule.InteractiveFitModel.AbstractFitModel');
         nch = SPM.parser.userchannel;
         nch.ParentChannel=ch;
-        nch.Parameters = fitmodel;
+        nch.UserObj = fitmodel;
         nch.Type = 'substractFit';
         nch.Name = 'substractedFit';
         nch.Units = ch.Units;

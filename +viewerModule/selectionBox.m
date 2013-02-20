@@ -4,14 +4,14 @@ classdef selectionBox < handle
         c2; % coordinates of corner 2
         Parent; % handle to the parent object
         UserData;
+        markersHandle; % handles of the markers accessed by selectionBoxMarker
+        ContextualMenu;
     end
     
     properties(Transient=true)
         handle; % graphic handle
         Axes;
         Figure;
-        markersHandle; % handles of the markers accessed by selectionBoxMarker
-        ContextualMenu;
     end
     
     properties(Access=private)
