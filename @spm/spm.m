@@ -122,7 +122,7 @@ classdef spm < hgsetget
             file = dir(spm.Path);
             opt.Method = 'SHA-256';
             opt.Format = 'hex';
-            value = SPM.lib.DataHash([file.name num2str(file.bytes) file.date],opt);
+            value = SPM.lib.DataHash([file.name num2str(file.bytes)],opt);
         end
         
         function s=XML(spm)
@@ -131,6 +131,18 @@ classdef spm < hgsetget
             else
               s=[];
             end
+        end
+        
+        function s=XML_XInclude(spm)
+            if (exist(spm.XMLDataFile,'file')==2)
+              s=SPM.xml_read_xinclude(spm.XMLDataFile);
+            else
+              s=[];
+            end
+        end
+        
+        function value=get.XMLDataFile(spm)
+            value = [spm.Path '.xml'];
         end
     end
     

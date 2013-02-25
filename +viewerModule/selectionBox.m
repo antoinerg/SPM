@@ -2,13 +2,16 @@ classdef selectionBox < handle
     properties
         c1; % coordinates of corner 1
         c2; % coordinates of corner 2
-        handle; % graphic handle
         Parent; % handle to the parent object
+        UserData;
         markersHandle; % handles of the markers accessed by selectionBoxMarker
+        ContextualMenu;
+    end
+    
+    properties(Transient=true)
+        handle; % graphic handle
         Axes;
         Figure;
-        ContextualMenu;
-        UserData;
     end
     
     properties(Access=private)
@@ -20,10 +23,6 @@ classdef selectionBox < handle
             % Initialize properties
             box.Parent=f;
             box.c1 = c1;
-            
-            % Instantiate a patch for visual representation of region
-            box.handle = patch('FaceColor','r','FaceAlpha',0.2,'LineStyle','--',...
-                'Parent',f.Axes,'Visible','off','Tag','selectionBox');
             
             % Interactively draw initial box
             set(box.Figure,'WindowButtonMotionFcn',@box.initialSizing);
@@ -106,7 +105,7 @@ classdef selectionBox < handle
             % Redraw the markers
             box.markersHandle.draw;
         end
-        
+                   
         function draw(box)
             % Draw the box
             x = [box.c1(1) box.c1(1,1) box.c2(1) box.c2(1)];
@@ -123,6 +122,16 @@ classdef selectionBox < handle
         function select(box)
             % Called when user click on the box
             box.markersHandle.show;
+        end
+        
+        function v=get.handle(box)
+          % Instantiate a patch for visual representation of region if not
+          % already done
+          if isempty(box.handle)
+            box.handle = patch('FaceColor','r','FaceAlpha',0.2,'LineStyle','--',...
+                'Parent',box.Axes,'Visible','off','Tag','selectionBox');
+          end
+          v=box.handle;
         end
         
         function v=get.Axes(box)

@@ -3,11 +3,16 @@ classdef userchannel < SPM.channel
         ParentChannel
         Type
         Parameters
+        UserData
+    end
+    
+    properties(Hidden=true)
+       UserObj; 
     end
     
     properties(Hidden=true,SetAccess='protected')
-        rawData=[];
-        Data=[];
+       rawData=[];
+       Data=[];
     end
     
     methods

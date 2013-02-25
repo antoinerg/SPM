@@ -1,22 +1,20 @@
 classdef selectionBoxMarker < handle
     properties
-        Axes;
-        Figure;
         selectionBox;
-        handle; % Graphic handle
         index;
         pos; % [x;y];
+    end
+    
+    properties(Transient=true)
+        Axes;
+        Figure;
+        handle; % Graphic handle
     end
     methods
         function marker = selectionBoxMarker(box,i)
             marker.index=i;
             marker.selectionBox=box;
-            marker.handle = line('parent', marker.Axes,'Marker','s',...
-                'MarkerEdgeColor','none', 'MarkerFaceColor','k','MarkerSize',6,...
-                'ButtonDownFcn',@marker.select,...
-                'Visible','off');
-            marker.draw;
-            
+            marker.draw;            
         end
         
         function draw(marker)
@@ -28,6 +26,16 @@ classdef selectionBoxMarker < handle
             for i=1:length(marker)
              set(marker(i).handle,{'XData','YData'},{marker(i).pos(1),marker(i).pos(2)});
             end
+        end
+        
+        function v=get.handle(marker)
+          if isempty(marker.handle)
+            marker.handle = line('parent', marker.Axes,'Marker','s',...
+                'MarkerEdgeColor','none', 'MarkerFaceColor','k','MarkerSize',6,...
+                'ButtonDownFcn',@marker.select,...
+                'Visible','off');
+          end
+          v=marker.handle;
         end
         
         function v=get.pos(marker)

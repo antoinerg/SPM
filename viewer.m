@@ -26,7 +26,8 @@ classdef viewer < handle
         end
       
         function export(v,path)
-            print(v.Figure,'-dpng','-r72',path);
+            %print(v.Figure,'-dpng','-r72',path);
+            SPM.lib.plot2svg(path,v.Figure);
             
             f=[];
             view=[];

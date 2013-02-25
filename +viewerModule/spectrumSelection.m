@@ -1,12 +1,15 @@
 classdef spectrumSelection < handle
     properties
-        Line;
         selectedBox;
         selectionBox;
         xChannel;
+        Channel;
+    end
+
+    properties(Transient=true)
         Figure;
         Axes;
-        Channel;
+        Line;
     end
     
     events
@@ -40,27 +43,45 @@ classdef spectrumSelection < handle
             % Call superclass constructor
             %sV=sV@SPM.viewer(ych);
             sV.Channel=ych;
-            sV.Figure=figure;
-            sV.Axes=axes;
             sV.xChannel=xch;
             
+            %sV.draw;
+        end
+        
+        function draw(sV)
+            sV.Figure=figure;
+            sV.Axes=axes;
             set(sV.Figure,'Name','spectrum Selection');
             set(sV.Figure,'Toolbar','none','menubar','none');
             set(sV.Axes,'NextPlot','add');
             
             % Plot the channel
-            fplot=plot(sV.Axes,sV.xChannel.Data,ych.Data,'Tag','data');
+            fplot=plot(sV.Axes,sV.xChannel.Data,sV.Channel.Data,'Tag','data');
             sV.Line=fplot;
             
             % Label axes
-            ylabel(sV.Axes,ych.Name);
-            xlabel(sV.Axes,xch.Name);
+            ylabel(sV.Axes,sV.Channel.Name);
+            xlabel(sV.Axes,sV.xChannel.Name);
             
             % Freeze the axis
             sV.freezeAxes;
             
             % Set callback to create new selection box on axis and plot
             set([sV.Axes,sV.Line],'ButtonDownFcn',@sV.newSelectionBox);
+            
+            % If retrieving a saved session, redraw all boxes
+            if ~isempty(sV.selectionBox)
+               for i=1:length(sV.selectionBox)
+                   sV.selectionBox(i).handle = [];
+                   sV.selectionBox(i).draw;
+                   % Reattach the UI manually in your child object
+                   % This was needed to prevent race condition since the
+                   % children object might not have all its UI element
+                   % drawn yet.
+                   % 
+                   % sV.selectionBox(i).attachUI;
+               end
+            end
         end
         
         function set.selectedBox(sV,box)
@@ -103,16 +124,10 @@ classdef spectrumSelection < handle
             set(sV.Axes,'YLimMode','auto');
         end
         
-%         function b=saveobj(a)
-%             b=a;
-%             hgsave(a.Figure,'fig');
-%         end
     end
     
     methods(Static=true)
-%         function b=loadobj(a)
-%             b.Figure=hgload('fig');
-%         end 
+
     end
     
     methods(Access=private)

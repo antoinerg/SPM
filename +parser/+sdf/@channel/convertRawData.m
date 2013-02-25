@@ -7,7 +7,7 @@ data = convert(sfchannel.rawData);
 sfchannel.Data = data;
 
     function out=convert(data)
-        minus=bitshift(data,-31);
+        minus=bitshift(abs(data),-31);
         result=-minus.*(2^32-data)+(1-minus).*data;
         data=sfchannel.n0+(result+2^31).*dm;
         out=flipud(data);
