@@ -18,7 +18,7 @@ while s1~=[26 4]
 end
 
 % read the data
-im_nr = sxmch.pos*2;
+im_nr = sxmch.pos;
 size = prod(header.scan_pixels)*4;   % 4 Bytes per pixel
 fseek(fid, im_nr*size, 0);
 
