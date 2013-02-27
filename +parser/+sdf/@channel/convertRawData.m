@@ -4,7 +4,7 @@ n10range=sfchannel.n1-sfchannel.n0;
 dm=n10range/2^32;
 
 data = convert(sfchannel.rawData);
-if strcmpii(sfchannel.Direction,'Backward')
+if strcmpi(sfchannel.Direction,'Backward')
     sfchannel.Data = fliplr(data);
 else
     sfchannel.Data = data;
