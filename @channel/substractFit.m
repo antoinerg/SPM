@@ -12,7 +12,7 @@ else
         nch.ParentChannel=ch;
         nch.UserObj = fitmodel;
         nch.Type = 'substractFit';
-        nch.Name = 'substractedFit';
+        nch.Name = [ch.Name ' | substractedFit'];
         nch.Units = ch.Units;
         nch.spm = ch.spm;
         nch.Direction = ch.Direction;

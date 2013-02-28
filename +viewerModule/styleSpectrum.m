@@ -20,7 +20,7 @@ ylabel(v.Axes,ch.Units);
 
 %% Figure size
 width=800;
-height=400;
+height=300;
 set(fig,'Position',[0 0 width height]); % Size in pixels
 
 %% Fonts

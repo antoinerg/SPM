@@ -17,6 +17,7 @@ classdef viewer < handle
                 v.Size(1) = length(v.Child);
                 v.Size(2) = 1;
             end
+            v.draw;
         end
         
         function delete(v)
