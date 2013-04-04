@@ -20,10 +20,10 @@ classdef view < handle
         
         function draw(v)
             [m,n]=size(v.Channel.Data);
-            if m==1 || n==1
-                v.plotSpectrum;
-            else
+            if ((m>1 && n>1) || strcmp(v.Channel.spm.Type,'Classic Scan'))
                 v.plotImage;
+            else
+                v.plotSpectrum;
             end
         end
         
