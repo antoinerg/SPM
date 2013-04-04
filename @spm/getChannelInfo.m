@@ -17,7 +17,6 @@ if (L1==0)
 else
     disp('User channels')
     for i=1:L1
-        fprintf('\t%i:  %s (%s) [%s]\n',i,spm.Channel(i).Name,spm.Channel(i).Units,spm.Channel(i).Direction);
         fprintf('\t%i:  %s (%s) [%s]\n',i,spm.UserChannel(i).Name,spm.UserChannel(i).Units,spm.UserChannel(i).Direction);
     end
 end
