@@ -74,7 +74,7 @@ classdef view < handle
         end
         
         function showTitle(v)
-            title(v.Axes,v.Channel.Name);
+            title(v.Axes,[v.Channel.Name ' [' v.Channel.Direction ']']);
         end
         
         function attachContextMenu(v)
