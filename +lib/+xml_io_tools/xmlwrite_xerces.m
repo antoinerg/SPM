@@ -45,7 +45,8 @@ end
 % 1) create the output format according to the document definitions
 % and type
 objOutputFormat = org.apache.xml.serialize.OutputFormat(source);
-set(objOutputFormat,'Indenting','on');
+%set(objOutputFormat,'Indenting','on');
+objOutputFormat.setIndenting(true);
 
 % 2) create the output stream. In this case: an XML file
 objFile = java.io.File(result);
