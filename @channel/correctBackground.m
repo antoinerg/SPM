@@ -1,4 +1,4 @@
-function nch=correctDissipation(channel,ne)
+function nch=correctBackground(channel,ne)
 %Correct dissipation
 ch=channel;
 h=findobj(ch.spm.UserChannel,'Type','correctDissipation','-and','ParentChannel',ch,'UserObj',ne);
@@ -11,8 +11,8 @@ else
         nch = SPM.parser.userchannel;
         nch.ParentChannel=ch;
         nch.UserObj = ne;
-        nch.Type = 'correctDissipation';
-        nch.Name = 'correctedDissipation';
+        nch.Type = 'correctBackground';
+        nch.Name = [ch.Name 'with corrected background'];
         nch.Units = ch.Units;
         nch.spm = ch.spm;
         nch.Direction = ch.Direction;
