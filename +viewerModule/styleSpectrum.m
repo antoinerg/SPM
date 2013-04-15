@@ -7,7 +7,7 @@ ch = v.Channel;
 xch = v.xChannel;
 
 %% Title
-%title(ax,ch.Name)
+title(ax,ch.Name);
 %ch.Name
 
 %% Axes size
