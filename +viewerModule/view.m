@@ -1,6 +1,6 @@
 classdef view < handle
     properties
-        Viewer;
+        Figure;
         Axes;
         Handle;
         Channel;
@@ -10,11 +10,25 @@ classdef view < handle
     end
     
     methods
-        function v = view(viewer,ch,varargin)
-            v.Viewer=viewer;
+        function v = view(ch,varargin)
+            p = inputParser;
+            is_channel=@(ch) isa(ch,'SPM.channel') || isempty(ch);
+            p.addRequired('ch');
+            p.addOptional('xCh',{},is_channel);
+            p.addParamValue('figure',{});
+            p.parse(ch,varargin{:});
+            
+            
+            if isempty(p.Results.figure);
+                v.Figure = figure;
+            else
+                v.Figure=p.Results.figure;
+            end
+            
+            v.Axes = axes('Parent',v.Figure);
             v.Channel=ch;
-            if ~isempty(varargin)
-                v.xChannel = varargin{1};
+            if ~isempty(p.Results.xCh)
+                v.xChannel = p.Results.xCh;
             end
         end
         
@@ -33,13 +47,12 @@ classdef view < handle
             % Using pcolor
             %v.Handle=pcolor(v.Channel.Data,'Parent',v.Axes);
             %shading flat;
-                        
+            
             % Using imshow
             %v.Handle=imshow(ch.Data,'Parent',v.Axes,'Colormap',SPM.viewerModule.gold);
             
             % Using imagesc
             v.Handle=imagesc(ch.Data,'Parent',v.Axes);
-           
             v.attachContextMenu;
             v.showTitle;
             SPM.viewerModule.styleImage(v);

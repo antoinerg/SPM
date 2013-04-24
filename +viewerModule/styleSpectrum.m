@@ -1,6 +1,6 @@
 function styleSpectrum(v)
 %% For convenience
-fig = v.Viewer.Figure;
+fig = v.Figure;
 ax = v.Axes;
 hd = v.Handle;
 ch = v.Channel;
