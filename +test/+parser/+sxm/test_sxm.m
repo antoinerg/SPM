@@ -14,7 +14,7 @@ s=SPM.load(f);
 
 function testParseChannel(f)
 s = SPM.parser.sxm.spm(f);
-assertEqual(length(s.Channel),7);
+assertEqual(length(s.Channel),14);
 
 function testChannelData(f)
 s = SPM.parser.sxm.spm(f);
