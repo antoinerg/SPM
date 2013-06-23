@@ -12,7 +12,7 @@ else
         nch.ParentChannel=ch;
         nch.UserObj = och;
         nch.Type = 'Substract';
-        nch.Name = 'Difference';
+        nch.Name = ['Difference between ' channel.Name ' and ' och.Name];
         nch.Units = ch.Units;
         nch.spm = ch.spm;
         nch.Direction = ch.Direction;

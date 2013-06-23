@@ -1,14 +1,14 @@
 function styleSpectrum(v)
 %% For convenience
-fig = v.Viewer.Figure;
+fig = v.Figure;
 ax = v.Axes;
 hd = v.Handle;
 ch = v.Channel;
 xch = v.xChannel;
 
 %% Title
-title(ax,ch.Name)
-ch.Name
+title(ax,ch.Name);
+%ch.Name
 
 %% Axes size
 %set(ax,'Position',[0 0.05 1 0.9]);
@@ -20,7 +20,7 @@ ylabel(v.Axes,ch.Units);
 
 %% Figure size
 width=800;
-height=400;
+height=300;
 set(fig,'Position',[0 0 width height]); % Size in pixels
 
 %% Fonts

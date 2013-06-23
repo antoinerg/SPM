@@ -36,8 +36,8 @@ fclose(fid);
 
 nspectrum.Width=0;
 nspectrum.Height=0;
-nspectrum.Type=nspectrum.Header.Experiment;
-nspectrum.Date=nspectrum.Header.Date;
+nspectrum.Type=nspectrum.Header.experiment;
+nspectrum.Date=nspectrum.Header.date;
 end
 
 %%%%
@@ -52,10 +52,13 @@ function header=addToHeader(header,line)
     if ~isempty(C{1})
         % Read the name and sanitize
         name=C{1}{1};
-        substr={' ','>','(',')','-','/','.','^'};
-        for i=1:length(substr)
-            name=strrep(name,substr{i},'');
-        end
+        name=regexprep(lower(name), '[^a-z0-9_]', '_');
+        name=strtrim(name);
+        
+        %substr={' ','>','(',')','-','/','.','^'};
+        %for i=1:length(substr)
+        %    name=strrep(name,substr{i},'');
+        %end
 
 
         % Read attr    

@@ -86,8 +86,10 @@ classdef AbstractFitModel < handle
             s=struct;
             cname=coeffnames(fitModel.fit);
             cvalue=coeffvalues(fitModel.fit);
+            ci = confint(fitModel.fit,0.95);
             for i=1:length(cname)
-                s = setfield(s,cname{i},cvalue(i));
+                d = struct('lower',ci(1,i),'value',cvalue(i),'higher',ci(2,i));
+                s = setfield(s,cname{i},d);
             end
         end
     end

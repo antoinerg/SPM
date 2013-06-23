@@ -14,7 +14,7 @@ else
     nch = SPM.parser.userchannel;
     nch.Type = 'InteractiveFit';
     nch.ParentChannel=ch;
-    nch.Name = [ch.Name ' | InteractiveFit session '];
+    nch.Name = [ch.Name ' | InteractiveFit session'];
     nch.Units = ch.Units;
     nch.spm = ch.spm;
     nch.Direction = ch.Direction;

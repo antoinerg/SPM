@@ -40,8 +40,7 @@ classdef channel < hgsetget
         %         end
         
         function v=plot(ch,varargin)
-            v=SPM.viewer;
-            v.add(ch,varargin{:});
+            v=SPM.viewerModule.view(ch,varargin{:});
             v.draw;            
         end
        
