@@ -15,7 +15,7 @@ If you have git installed under *nix just type the following from the command-li
 Configuration
 -------------
 
-Before using it, please edit 'config.m' in the root of the directory and adjust according to your needs.
+Before using it, you will need to create a configuration file called "config.m" in the root of the directory. A sample configuration file is provided called "config.m.sample"
 
 Usage
 -----
