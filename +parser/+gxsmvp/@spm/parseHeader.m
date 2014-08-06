@@ -126,7 +126,7 @@ while ischar(myLine)
     if strfind(myLine,myHeader) 
 	myPattern = 'date=';
         myField = myLine((strfind(myLine,myPattern)+length(myPattern)):end);
-        vp.Datenum = datenum(myField, 'ddd mmm dd HH:MM:SS');
+        vp.Datenum = datenum(myField, 'ddd mmm dd HH:MM:SS yyyy');
         vp.Date = datestr(vp.Datenum);
     end
 
