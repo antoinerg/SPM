@@ -28,6 +28,10 @@ function testChannelData(f)
 s = SPM.load(f);
 assertEqual(size(s.Channel(1).Data),[4000 1]);
 
+function testChannelDataPoint(f)
+s = SPM.load(f);
+assertEqual(s.Channel(1).Data(1),-0.999786);
+
 function testChannelNameUnit(f)
 s = SPM.load(f);
 assertEqual(s.Channel(1).Name,'Bias');
