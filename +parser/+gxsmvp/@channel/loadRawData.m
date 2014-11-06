@@ -12,21 +12,21 @@ pos=vpch.pos;
 rawData=zeros(vp.NPoints,1);
 
 myHeader = '#C Index';
+
 while(~eof)
     line=fgets(fid);
-    if ~(isempty(strfind(line,myHeader)));
+    if (strfind(line,myHeader));
+        line=fgets(fid);
+        while(line(1) ~= '#')
+            myNums=str2num(line);
+            rawData(i)=myNums(pos);
+            i=i+1;
+            line=fgets(fid);
+        end
         break;
     end
-end
-
-while(~eof)
-	line=fgets(fid);
-    myNums=str2num(line);
-    rawData(i)=myNums(pos);
-	i=i+1;
-	if (i == vp.NPoints), break; end % Stop reading after NPoints
 	if( (-1)==line ), eof  = 1; end % End of file condition
 end
-
+fclose(fid);
 vpch.rawData=rawData;
 end
