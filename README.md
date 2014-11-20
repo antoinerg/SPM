@@ -31,3 +31,13 @@ Contributing
 ------------
 
 For now, pretty much contact me over email with your patch and I will incorporate it.
+
+Collaborators
+-------------
+
+In no particular order, I would like to thanks the following individuals for their contributions to this project:
+
+* William Paul
+* Mehdi El Ouali
+* Zeno Schumacher
+* Aaron Mascaro
