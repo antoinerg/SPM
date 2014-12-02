@@ -52,10 +52,25 @@ classdef view < handle
             %v.Handle=imshow(ch.Data,'Parent',v.Axes,'Colormap',SPM.viewerModule.gold);
             
             % Using imagesc
-            v.Handle=imagesc(ch.Data,'Parent',v.Axes);
-            v.attachContextMenu;
-            v.showTitle;
-            SPM.viewerModule.styleImage(v);
+            %add function for 128 line with 256 pixel
+            if v.Channel.spm.Header.scan_pixels(2) == 128 && v.Channel.spm.Header.scan_pixels(1) == 256;
+                dataconv = zeros(256,256);
+                dataconv(1,:) = ch.Data(1,:);
+                dataconv(2,:) = ch.Data(1,:);
+                for n=2:1:128
+                dataconv(2*n,:) = ch.Data(n,:);
+                dataconv(2*n-1,:) = ch.Data(n,:);
+                end
+                v.Handle=imagesc(dataconv,'Parent',v.Axes);
+                v.attachContextMenu;
+                v.showTitle;
+                SPM.viewerModule.styleImage(v);
+            else
+                v.Handle=imagesc(ch.Data,'Parent',v.Axes);
+                v.attachContextMenu;
+                v.showTitle;
+                SPM.viewerModule.styleImage(v);
+            end
         end
         
         function plotSpectrum(v)
