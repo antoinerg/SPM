@@ -27,7 +27,7 @@ eof=0;header_end=0;
         if findstr('[bwd]',C{i})
             ch.Direction='Backward';
         end
-        ch.Name=strrep(s{1}{1},'[bwd]',''); % Name
+        ch.Name=strrep(s{1}{1},' [bwd]',''); % Name
         ch.Units=s{1}{2}; % Units
         ch.id=i; % id
         nspectrum.Channel=cat(1,nspectrum.Channel,ch); % Append to the cell of channels
