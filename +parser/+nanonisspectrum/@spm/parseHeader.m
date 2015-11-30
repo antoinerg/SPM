@@ -37,7 +37,9 @@ fclose(fid);
 nspectrum.Width=0;
 nspectrum.Height=0;
 nspectrum.Type=nspectrum.Header.experiment;
-nspectrum.Date=nspectrum.Header.date;
+% nspectrum.Header.date = 02.11.2011 11:17:24
+d=datenum(nspectrum.Header.date,'dd.mm.yyyy HH:MM:SS');
+nspectrum.Date=datestr(d,'yyyy-mm-ddTHH:MM:SS');
 end
 
 %%%%

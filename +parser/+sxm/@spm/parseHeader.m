@@ -93,8 +93,9 @@ end
 sxm.Header=header;
 sxm.Width=header.scan_range(1)*1e9;
 sxm.Height=header.scan_range(2)*1e9;
-sxm.Date=header.rec_date;
-
+% header.rec_date=25.07.2011 and header.rec_time = 17:43:19
+d=datenum([header.rec_date 'T' header.rec_time],'dd.mm.yyyyTHH:MM:SS');
+sxm.Date=datestr(d,'yyyy-mm-ddTHH:MM:SS');
 
     function addToChannel(str,pos)
         if ~(isempty(str))
