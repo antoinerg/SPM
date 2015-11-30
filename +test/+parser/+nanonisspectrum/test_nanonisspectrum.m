@@ -20,3 +20,6 @@ function testChannelData(f)
 s = SPM.parser.nanonisspectrum.spm(f);
 assertEqual(size(s.Channel(1).Data),[256 1])
 
+function testParseDate(f)
+s = SPM.parser.nanonisspectrum.spm(f);
+assertEqual(s.Date,'2011-11-02T11:17:24');

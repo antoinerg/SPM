@@ -20,7 +20,7 @@ function testChannelData(f)
 s = SPM.parser.sxm.spm(f);
 assertEqual(size(s.Channel(1).Data),[256 256])
 
-function testParseDate(f)
+function testDate(f)
 s = SPM.parser.sxm.spm(f);
 assertEqual(s.Date,'2011-07-25T17:43:19');
 
